@@ -1,0 +1,32 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- bash: |
+        # Use curl to download the binary
+        curl --location --silent --fail --show-error -o terratest_log_parser https://github.com/gruntwork-io/terratest/releases/download/v0.13.13/terratest_log_parser_linux_amd64
+        # Make the downloaded binary executable
+        chmod +x terratest_log_parser
+        # Finally, we place the downloaded binary to a place in the PATH
+        sudo mv terratest_log_parser /usr/local/bin
+        # Display go version
+# Run Terratest
+- bash: |
+        cd $(System.DefaultWorkingDirectory)/src/test
+        go mod init NEC-MPC-Team/DevOpsPOC-E2ETest
+        go test -v -timeout 30m | tee test_output.log
+        terratest_log_parser -testlog test_output.log -outputdir test_output
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/TEST-*.xml'
+    failTaskOnFailedTests: true
