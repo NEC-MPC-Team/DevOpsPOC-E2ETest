@@ -18,19 +18,21 @@ steps:
   inputs:
     secureFile: 'id_rsa.pub'
 
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      # Write your commands here
-      TEST_SSH_KEY_PATH=$(System.DefaultWorkingDirectory)
+# - task: Bash@3
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       # Write your commands here
+#       TEST_SSH_KEY_PATH=$(System.DefaultWorkingDirectory)
 
 - task: Bash@3
   inputs:
     targetType: 'inline'
     script: |
-      # Write your commands here
       echo $TEST_SSH_KEY_PATH
+  env: 
+   TEST_SSH_KEY_PATH: $(System.DefaultWorkingDirectory)
+  displayName: set enviroment variable
 
 - bash: |
         # Use curl to download the binary
