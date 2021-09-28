@@ -47,8 +47,12 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
+      #echo variable
       echo $TEST_SSH_KEY_PATH
-  displayName: set enviroment variable
+      #list files
+      ls $TEST_SSH_KEY_PATH
+
+  displayName: print enviroment variable
 
 # Run Terratest
 - bash: |
