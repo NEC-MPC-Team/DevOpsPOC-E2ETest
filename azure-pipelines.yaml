@@ -11,16 +11,16 @@ pool:
 
 
 steps:
-- task: AzureCLI@2
-  displayName: Azure CLI
-  inputs:
-    azureSubscription: $(AZCONNECTION)
-    scriptType: pscore
-    scriptLocation: inlineScript
-    inlineScript: |
-      az --version
-      az account show
-      az login
+# - task: AzureCLI@2
+#   displayName: Azure CLI
+#   inputs:
+#     azureSubscription: $(AZCONNECTION)
+#     scriptType: pscore
+#     scriptLocation: inlineScript
+#     inlineScript: |
+#       az --version
+#       az account show
+#       az login
 
 - task: DownloadSecureFile@1
   name: sshCert1
@@ -46,6 +46,10 @@ steps:
       echo $TEST_SSH_KEY_PATH
   env: 
    TEST_SSH_KEY_PATH: $(sshCert1.secureFilePath)
+   ARM_CLIENT_ID: $servicePrincipal.clientId
+   ARM_CLIENT_SECRET: $servicePrincipal.clientSecret
+   ARM_SUBSCRIPTION_ID: $servicePrincipal.subscriptionId
+   ARM_TENANT_ID: $servicePrincipal.tenantId
   displayName: set enviroment variable
 
 - bash: |
