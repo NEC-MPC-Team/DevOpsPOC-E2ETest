@@ -67,6 +67,8 @@ steps:
     script: |
       #echo variable
       export TEST_SSH_KEY_PATH=/home/vsts/work/_temp/
+      #echo subscription
+      echo $ARM_SUBSCRIPTION_ID
       #list files
       ls $TEST_SSH_KEY_PATH
 
