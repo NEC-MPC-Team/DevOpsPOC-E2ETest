@@ -50,7 +50,7 @@ steps:
     targetType: 'inline'
     script: |
       #echo variable
-      echo $TEST_SSH_KEY_PATH
+      export TEST_SSH_KEY_PATH=/home/vsts/work/_temp/
       #list files
       ls $TEST_SSH_KEY_PATH
 
