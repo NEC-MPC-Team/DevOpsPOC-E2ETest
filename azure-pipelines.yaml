@@ -9,7 +9,17 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+
 steps:
+- task: AzureCLI@2
+  displayName: Azure CLI
+  inputs:
+    azureSubscription: $(AZCONNECTION)
+    scriptType: ps
+    scriptLocation: inlineScript
+    inlineScript: |
+      az --version
+      az account show
 - task: DownloadSecureFile@1
   name: sshCert1
   inputs:
