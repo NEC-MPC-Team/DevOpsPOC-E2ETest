@@ -42,6 +42,11 @@ steps:
         # Finally, we place the downloaded binary to a place in the PATH
         sudo mv terratest_log_parser /usr/local/bin
         # Display go version
+
+- bash: |
+        echo $TEST_SSH_KEY_PATH
+  displayName: printing the ssh path
+
 # Run Terratest
 - bash: |
         cd $(System.DefaultWorkingDirectory)/src/test
