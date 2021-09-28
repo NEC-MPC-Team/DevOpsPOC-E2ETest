@@ -43,9 +43,12 @@ steps:
         sudo mv terratest_log_parser /usr/local/bin
         # Display go version
 
-- bash: |
-        echo $TEST_SSH_KEY_PATH
-  displayName: printing the ssh path
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      echo $TEST_SSH_KEY_PATH
+  displayName: set enviroment variable
 
 # Run Terratest
 - bash: |
