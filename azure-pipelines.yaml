@@ -11,10 +11,12 @@ pool:
 
 steps:
 - task: DownloadSecureFile@1
+  name: sshCert1
   inputs:
     secureFile: 'id_rsa'
 
 - task: DownloadSecureFile@1
+  name: sshCert2
   inputs:
     secureFile: 'id_rsa.pub'
 
@@ -31,7 +33,7 @@ steps:
     script: |
       echo $TEST_SSH_KEY_PATH
   env: 
-   TEST_SSH_KEY_PATH: $(System.DefaultWorkingDirectory)
+   TEST_SSH_KEY_PATH: $(sshCert1.secureFilePath)
   displayName: set enviroment variable
 
 - bash: |
