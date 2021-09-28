@@ -10,6 +10,17 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: 'id_rsa'
+
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: 'id_rsa.pub'
+
+- bash: export TEST_SSH_KEY_PATH=$(System.DefaultWorkingDirectory)
+  displayName: set ssh key path
+
 - bash: |
         # Use curl to download the binary
         curl --location --silent --fail --show-error -o terratest_log_parser https://github.com/gruntwork-io/terratest/releases/download/v0.13.13/terratest_log_parser_linux_amd64
