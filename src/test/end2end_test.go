@@ -60,6 +60,8 @@ func TestEndToEndDeploymentScenario(t *testing.T) {
 		if vmLinux1PublicIPAddress == "" {
 			t.Fatal("Cannot retrieve the public IP address value for the linux vm 1.")
 		}
+		
+		fmt.Println("sshPath: ", sshKeyPath)
 
 		key, err := ioutil.ReadFile(sshKeyPath)
 		if err != nil {
