@@ -50,7 +50,7 @@ func TestEndToEndDeploymentScenario(t *testing.T) {
 
 		// it takes some time for Azure to assign the public IP address so it's not available in Terraform output after the first apply
 		attemptsCount := 0
-		for vmLinux1PublicIPAddress == "" && attemptsCount < 5 {
+		for vmLinux1PublicIPAddress == "" && attemptsCount < 10 {
 			// add wait time to let Azure assign the public IP address and apply the configuration again, to refresh state.
 			time.Sleep(30 * time.Second)
 			terraform.Apply(t, terraformOptions)
