@@ -19,11 +19,12 @@ func TestEndToEndDeploymentScenario(t *testing.T) {
 	sshKeyPath := "/home/vsts/work/_temp/id_rsa"
 	sshKeyPath2 := os.Getenv("TEST_SSH_KEY_PATH")
 	fmt.Println("sshPath2: ", sshKeyPath2)
+	fmt.Println("sshPath: ", sshKeyPath)
 
 	if sshKeyPath == "" {
 		//t.Fatalf("TEST_SSH_KEY_PATH environment variable cannot be empty.")
 	} else {
-		sshKeyPath = "/home/vsts/work/_temp/id_rsa.pub"
+		sshKeyPath = "/home/vsts/work/_temp/id_rsa"
 	}
 
 	// User Terratest to deploy the infrastructure
