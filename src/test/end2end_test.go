@@ -64,7 +64,8 @@ func TestEndToEndDeploymentScenario(t *testing.T) {
 
 		key, err := ioutil.ReadFile(sshKeyPath)
 		if err != nil {
-			t.Fatalf("Unable to read private key: %s %v",sshKeyPath, err)
+			fmt.Println("sshPath: ", sshKeyPath)
+			t.Fatalf("Unable to read private key: %v",sshKeyPath, err)
 		}
 
 		signer, err := ssh.ParsePrivateKey(key)
