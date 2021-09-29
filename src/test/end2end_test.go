@@ -16,7 +16,8 @@ func TestEndToEndDeploymentScenario(t *testing.T) {
 	t.Parallel()
 
 	fixtureFolder := "../"
-	sshKeyPath := os.Getenv("TEST_SSH_KEY_PATH")
+	sshKeyPath := "/home/vsts/work/_temp/id_rsa.pub"
+	//os.Getenv("TEST_SSH_KEY_PATH")
 	//godebug := os.Getenv("GODEBUG")
 
 	//print(godebug)
