@@ -52,7 +52,7 @@ func TestEndToEndDeploymentScenario(t *testing.T) {
 
 		// it takes some time for Azure to assign the public IP address so it's not available in Terraform output after the first apply
 		attemptsCount := 0
-		for attemptsCount < 10 {
+		for attemptsCount < 2 {
 			// add wait time to let Azure assign the public IP address and apply the configuration again, to refresh state.
 			time.Sleep(30 * time.Second)
 			terraform.Apply(t, terraformOptions)
@@ -85,21 +85,6 @@ func TestEndToEndDeploymentScenario(t *testing.T) {
 			},
 			HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 		}
-
-		// var ports [1]string
-		// ports[0] = "22"
-		// for _, port := range ports {
-		// 	timeout := time.Second
-		// 	conn, err := net.DialTimeout("tcp", net.JoinHostPort(vmLinux1PublicIPAddress, port), timeout)
-		// 	fmt.Print("testing ports")
-		// 	if err != nil {
-		// 		fmt.Println("Connecting error:", err)
-		// 	}
-		// 	if conn != nil {
-		// 		defer conn.Close()
-		// 		fmt.Println("Opened", net.JoinHostPort(vmLinux1PublicIPAddress, port))
-		// 	}
-		// }
 
 		sshConnection, err := ssh.Dial("tcp", fmt.Sprintf("%s:22", vmLinux1PublicIPAddress), sshConfig)
 		if err != nil {
