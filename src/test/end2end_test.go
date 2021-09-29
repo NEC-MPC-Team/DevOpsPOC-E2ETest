@@ -13,7 +13,7 @@ import (
 )
 
 func TestEndToEndDeploymentScenario(t *testing.T) {
-	t.Parallel()
+	//t.Parallel()
 
 	fixtureFolder := "../"
 	sshKeyPath := "/home/vsts/work/_temp/id_rsa"
