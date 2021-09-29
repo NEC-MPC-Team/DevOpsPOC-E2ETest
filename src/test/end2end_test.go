@@ -46,6 +46,8 @@ func TestEndToEndDeploymentScenario(t *testing.T) {
 		terraformOptions := test_structure.LoadTerraformOptions(t, fixtureFolder)
 
 		vmLinux1PublicIPAddress := terraform.Output(t, terraformOptions, "vm_linux_1_public_ip_address")
+		fmt.Println("publicIP: ", vmLinux1PublicIPAddress)
+		
 		vmLinux2PrivateIPAddress := terraform.Output(t, terraformOptions, "vm_linux_2_private_ip_address")
 
 		// it takes some time for Azure to assign the public IP address so it's not available in Terraform output after the first apply
@@ -56,6 +58,7 @@ func TestEndToEndDeploymentScenario(t *testing.T) {
 			terraform.Apply(t, terraformOptions)
 			vmLinux1PublicIPAddress = terraform.Output(t, terraformOptions, "vm_linux_1_public_ip_address")
 			attemptsCount++
+			fmt.Println("publicIP: ", vmLinux1PublicIPAddress)
 		}
 
 		if vmLinux1PublicIPAddress == "" {
