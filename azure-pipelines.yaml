@@ -6,6 +6,9 @@
 trigger:
 - main
 
+variables:
+ - group: component-test-vg
+
 pool:
   vmImage: ubuntu-latest
 
@@ -44,10 +47,6 @@ steps:
       echo $TEST_SSH_KEY_PATH
   env: 
    TEST_SSH_KEY_PATH: $(sshCert1.secureFilePath)
-   ARM_CLIENT_ID: $(PrincipalClientId)
-   ARM_CLIENT_SECRET: $(PrincipalSecret)
-   ARM_SUBSCRIPTION_ID: $(PrincipalSubscription)
-   ARM_TENANT_ID: $(PrincipalTenant)
   displayName: set enviroment variable
 
 - bash: |
@@ -65,10 +64,6 @@ steps:
     script: |
       #echo variable
       export TEST_SSH_KEY_PATH=/home/vsts/work/_temp/
-      export ARM_CLIENT_ID=$(PrincipalClientId)
-      export ARM_CLIENT_SECRET=$(PrincipalSecret)
-      export ARM_SUBSCRIPTION_ID=$(PrincipalSubscription)
-      export ARM_TENANT_ID=$(PrincipalTenant)
       env
       #list files
       ls $TEST_SSH_KEY_PATH
@@ -77,6 +72,7 @@ steps:
 
 # Run Terratest
 - bash: |
+        az login --service-principal -u $(ARM_CLIENT_ID) -p $(ARM_CLIENT_SECRET) --tenant $(ARM_TENANT_ID)
         cd $(System.DefaultWorkingDirectory)/src/test
         go mod init NEC-MPC-Team/DevOpsPOC-E2ETest
         go test -v -timeout 30m | tee test_output.log
