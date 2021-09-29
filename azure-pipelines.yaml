@@ -63,7 +63,7 @@ steps:
     targetType: 'inline'
     script: |
       #echo variable
-      export TEST_SSH_KEY_PATH=/home/vsts/work/_temp/
+      export TEST_SSH_KEY_PATH=/home/vsts/work/_temp/id_rsa.pub
       env
       #list files
       ls $TEST_SSH_KEY_PATH
