@@ -18,9 +18,7 @@ func TestEndToEndDeploymentScenario(t *testing.T) {
 	fixtureFolder := "../"
 	sshKeyPath := "/home/vsts/work/_temp/id_rsa.pub"
 	sshKeyPath2 := os.Getenv("TEST_SSH_KEY_PATH")
-	//godebug := os.Getenv("GODEBUG")
-
-	//print(godebug)
+	fmt.Println("sshPath2: ", sshKeyPath2)
 
 	if sshKeyPath == "" {
 		//t.Fatalf("TEST_SSH_KEY_PATH environment variable cannot be empty.")
