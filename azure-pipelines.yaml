@@ -67,8 +67,10 @@ steps:
     script: |
       #echo variable
       export TEST_SSH_KEY_PATH=/home/vsts/work/_temp/
-      #echo subscription
-      echo $ARM_SUBSCRIPTION_ID
+      export ARM_CLIENT_ID=$servicePrincipal.clientId
+      export ARM_CLIENT_SECRET=$servicePrincipal.clientSecret
+      export ARM_SUBSCRIPTION_ID=$servicePrincipal.subscriptionId
+      export ARM_TENANT_ID=$servicePrincipal.tenantId
       #list files
       ls $TEST_SSH_KEY_PATH
 
