@@ -46,7 +46,7 @@ steps:
     script: |
       echo $TEST_SSH_KEY_PATH
   env: 
-   TEST_SSH_KEY_PATH: $(sshCert1.secureFilePath)
+   TEST_SSH_KEY_PATH: $(sshCert2.secureFilePath)
   displayName: set enviroment variable
 
 - bash: |
