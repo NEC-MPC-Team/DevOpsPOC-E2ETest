@@ -7,5 +7,5 @@ variable location {
 variable ssh_public_key_file {
   type        = string
   description = "The file path of the public SSH key to use for the virtual machine."
-  default     = "~/.ssh/id_rsa.pub"
+  default     = "/home/vsts/work/_temp/id_rsa.pub"
 }
