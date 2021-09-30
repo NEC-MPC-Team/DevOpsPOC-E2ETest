@@ -86,7 +86,7 @@ func TestEndToEndDeploymentScenario(t *testing.T) {
 			HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 		}
 
-		sshConnection, err := ssh.Dial("tcp", fmt.Sprintf("%s:22", vmLinux1PublicIPAddress), sshConfig)
+		sshConnection, err := ssh.Dial("tcp", fmt.Sprintf("%s:22", "52.187.202.49"), sshConfig)
 		if err != nil {
 			t.Fatalf("Cannot establish SSH connection to vm-linux-1 public IP address: %v", err)
 		}
@@ -98,7 +98,7 @@ func TestEndToEndDeploymentScenario(t *testing.T) {
 		}
 
 		defer sshSession.Close()
-		err = sshSession.Run(fmt.Sprintf("ping -c 1 %s", vmLinux2PrivateIPAddress))
+		err = sshSession.Run(fmt.Sprintf("ping -c 1 %s", "10.0.2.5"))
 		if err != nil {
 			t.Fatalf("Cannot ping vm-linux-2 from vm-linux-2: %v", err)
 		}
